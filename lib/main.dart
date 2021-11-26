@@ -1,4 +1,5 @@
 import 'package:engage_chat_app/screens/loginScreen.dart';
+import 'package:engage_chat_app/screens/registrationScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: LoginScreen(),
+      home: RegistrationScreen(),
     );
   }
 }

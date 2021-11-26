@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'registrationScreen.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -77,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -110,7 +113,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text("Don't have an account?"),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        RegistrationScreen()));
+                          },
                           child: Text(
                             "  Sign Up",
                             style: TextStyle(
