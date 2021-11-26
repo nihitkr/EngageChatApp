@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               Text(
-                "Name",
+                "Nihit Kumar",
                 style: TextStyle(
                   color: Colors.black54,
                   fontWeight: FontWeight.w500,
