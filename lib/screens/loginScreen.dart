@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:engage_chat_app/screens/homescreen.dart';
 import 'package:flutter/material.dart';
 
 import 'registrationScreen.dart';
@@ -65,7 +66,14 @@ class _LoginScreenState extends State<LoginScreen> {
       borderRadius: BorderRadius.circular(30),
       color: Colors.red,
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+          );
+        },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         child: Text(
