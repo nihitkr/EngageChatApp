@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engage_chat_app/models/user_model.dart';
+import 'package:engage_chat_app/screens/chatRoomScreen.dart';
 import 'package:engage_chat_app/screens/loginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
+  static void logout(BuildContext context) {}
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -72,6 +75,21 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 15,
               ),
+
+              //Enter Chat Room
+              ActionChip(
+                label: Text("Enter Chat Room"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatRoom(),
+                    ),
+                  );
+                },
+              ),
+
+              //Logout
               ActionChip(
                 label: Text("Logout"),
                 onPressed: () {
