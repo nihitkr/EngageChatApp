@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engage_chat_app/models/database.dart';
 import 'package:engage_chat_app/models/user_model.dart';
 import 'package:engage_chat_app/screens/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -273,6 +274,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         .doc(users.uid)
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully");
+
+    Map<String, String> userInfoMap = {
+      "name": firstNameEditingController.text,
+      "email": emailEditingController.text,
+    };
+
+    DatabaseMethods databaseMethods = new DatabaseMethods();
+    databaseMethods.uploadUserInfo(userInfoMap);
 
     Navigator.pushAndRemoveUntil(
         (context),
