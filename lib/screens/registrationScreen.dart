@@ -21,11 +21,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
 
   //editing Controller
-  final firstNameEditingController = new TextEditingController();
-  final lastNameEditingController = new TextEditingController();
-  final emailEditingController = new TextEditingController();
-  final passwordEditingController = new TextEditingController();
-  final confirmPasswordEditingController = new TextEditingController();
+  final firstNameEditingController = TextEditingController();
+  final lastNameEditingController = TextEditingController();
+  final emailEditingController = TextEditingController();
+  final passwordEditingController = TextEditingController();
+  final confirmPasswordEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: firstNameEditingController,
       keyboardType: TextInputType.name,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{3,}$');
+        RegExp regex = RegExp(r'^.{3,}$');
         if (value!.isEmpty) {
           return ("Enter a First Name");
         }
@@ -63,7 +63,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: lastNameEditingController,
       keyboardType: TextInputType.name,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{3,}$');
+        RegExp regex = RegExp(r'^.{3,}$');
         if (value!.isEmpty) {
           return ("Enter a First Name");
         }
@@ -121,7 +121,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: passwordEditingController,
       obscureText: true,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{6,}$');
+        RegExp regex = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
           return ("Enter a value");
         }
@@ -149,8 +149,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: confirmPasswordEditingController,
       obscureText: true,
       validator: (value) {
-        if (passwordEditingController.text !=
-            confirmPasswordEditingController.text) {
+        if (passwordEditingController.text != confirmPasswordEditingController.text) {
           return "Password don't match";
         }
         return null;
@@ -269,10 +268,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     userModel.firstName = firstNameEditingController.text;
     userModel.lastName = lastNameEditingController.text;
 
-    await firebaseFirestore
-        .collection("user")
-        .doc(users.uid)
-        .set(userModel.toMap());
+    await firebaseFirestore.collection("user").doc(users.uid).set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully");
 
     Map<String, String> userInfoMap = {
@@ -280,13 +276,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       "email": emailEditingController.text,
     };
 
-    DatabaseMethods databaseMethods = new DatabaseMethods();
+    DatabaseMethods databaseMethods = DatabaseMethods();
     databaseMethods.uploadUserInfo(userInfoMap);
 
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-        (route) => false);
+    Navigator.pushAndRemoveUntil((context), MaterialPageRoute(builder: (context) => HomeScreen()), (route) => false);
   }
 
   //signUp Function
