@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engage_chat_app/models/user_model.dart';
+import 'package:engage_chat_app/screens/loginScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -6,6 +10,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  User? users = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(users!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               Text(
-                "Nihit Kumar",
+                "${loggedInUser.firstName} ${loggedInUser.lastName}",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Text(
+                "${loggedInUser.email}",
                 style: TextStyle(
                   color: Colors.black54,
                   fontWeight: FontWeight.w500,
@@ -48,7 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ActionChip(
                 label: Text("Logout"),
-                onPressed: () {},
+                onPressed: () {
+                  logout(context);
+                },
               ),
             ],
           ),
@@ -56,4 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+//Logout Function
+Future<void> logout(BuildContext context) async {
+  await FirebaseAuth.instance.signOut();
+  Navigator.of(context).pushReplacement(
+    MaterialPageRoute(
+      builder: (context) => LoginScreen(),
+    ),
+  );
 }
