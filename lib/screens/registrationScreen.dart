@@ -1,7 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:engage_chat_app/models/database.dart';
+import 'package:engage_chat_app/helper/database.dart';
+import 'package:engage_chat_app/helper/helper.dart';
 import 'package:engage_chat_app/models/user_model.dart';
 import 'package:engage_chat_app/screens/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,11 +22,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
 
   //editing Controller
-  final firstNameEditingController = new TextEditingController();
-  final lastNameEditingController = new TextEditingController();
-  final emailEditingController = new TextEditingController();
-  final passwordEditingController = new TextEditingController();
-  final confirmPasswordEditingController = new TextEditingController();
+  final firstNameEditingController = TextEditingController();
+  final lastNameEditingController = TextEditingController();
+  final emailEditingController = TextEditingController();
+  final passwordEditingController = TextEditingController();
+  final confirmPasswordEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +36,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: firstNameEditingController,
       keyboardType: TextInputType.name,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{3,}$');
+        RegExp regex = RegExp(r'^.{3,}$');
         if (value!.isEmpty) {
-          return ("Enter a First Name");
+          return ("Enter a Username");
         }
         if (!regex.hasMatch(value)) {
           return ("Invalid First (Min. 3 characters)");
@@ -63,7 +64,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: lastNameEditingController,
       keyboardType: TextInputType.name,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{3,}$');
+        RegExp regex = RegExp(r'^.{3,}$');
         if (value!.isEmpty) {
           return ("Enter a First Name");
         }
@@ -121,7 +122,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       controller: passwordEditingController,
       obscureText: true,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{6,}$');
+        RegExp regex = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
           return ("Enter a value");
         }
@@ -280,9 +281,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       "email": emailEditingController.text,
     };
 
-    DatabaseMethods databaseMethods = new DatabaseMethods();
-    databaseMethods.uploadUserInfo(userInfoMap);
+    HelperFunctions.saveUserEmailSharedPreference(emailEditingController.text);
+    HelperFunctions.saveUserNameSharedPreference(
+        firstNameEditingController.text);
 
+    DatabaseMethods databaseMethods = DatabaseMethods();
+    databaseMethods.uploadUserInfo(userInfoMap);
+    HelperFunctions.saveUserLoggedInSharedPreference(true);
     Navigator.pushAndRemoveUntil(
         (context),
         MaterialPageRoute(builder: (context) => HomeScreen()),

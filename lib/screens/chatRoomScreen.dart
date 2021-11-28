@@ -1,3 +1,7 @@
+// ignore_for_file: file_names, prefer_const_constructors
+
+import 'package:engage_chat_app/helper/constants.dart';
+import 'package:engage_chat_app/helper/helper.dart';
 import 'package:engage_chat_app/screens/homescreen.dart';
 import 'package:engage_chat_app/screens/loginScreen.dart';
 import 'package:engage_chat_app/screens/search.dart';
@@ -10,6 +14,19 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
+  // AuthMethods authMethods = new AuthMethods();
+
+  @override
+  void initState() {
+    getUserInfo();
+    super.initState();
+  }
+
+  getUserInfo() async {
+    Constants.myName = (await HelperFunctions.getUserNameSharedPreference())!;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

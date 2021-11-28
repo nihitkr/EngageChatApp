@@ -33,6 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome Screen"),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              logout(context);
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: Icon(Icons.exit_to_app),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Padding(
@@ -78,7 +91,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //Enter Chat Room
               ActionChip(
-                label: Text("Enter Chat Room"),
+                backgroundColor: Colors.redAccent,
+                label: Container(
+                  width: 150,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Enter Chat Room ",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      Icon(
+                        Icons.message_sharp,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -91,7 +121,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //Logout
               ActionChip(
-                label: Text("Logout"),
+                backgroundColor: Colors.redAccent,
+                label: Container(
+                  width: 150,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Logout ",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      Icon(
+                        Icons.exit_to_app,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
                 onPressed: () {
                   logout(context);
                 },

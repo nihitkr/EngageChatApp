@@ -1,5 +1,8 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engage_chat_app/helper/database.dart';
+import 'package:engage_chat_app/helper/helper.dart';
 import 'package:engage_chat_app/screens/forgetPasswordScreen.dart';
 import 'package:engage_chat_app/screens/homescreen.dart';
 import 'package:engage_chat_app/widgets/widgets.dart';
@@ -17,6 +20,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //form key
   final _formKey = GlobalKey<FormState>();
+
+  QuerySnapshot? snapshotUserInfo;
+  DatabaseMethods databaseMethods = new DatabaseMethods();
 
   //editing controller
   final TextEditingController emailController = new TextEditingController();
@@ -226,6 +232,15 @@ class _LoginScreenState extends State<LoginScreen> {
   //Login Function
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
+      HelperFunctions.saveUserEmailSharedPreference(email);
+      databaseMethods.getUserByEmail(email).then((val) {
+        snapshotUserInfo = val;
+        HelperFunctions.saveUserNameSharedPreference(
+            snapshotUserInfo!.docs[0]['firstName']);
+        print(
+            "${snapshotUserInfo!.docs[0]['firstName']} <- This should not be null");
+      });
+
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
