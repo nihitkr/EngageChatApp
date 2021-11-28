@@ -1,16 +1,25 @@
 # engage_chat_app
 
 A new Flutter project.
+Developed using:
+Framework: Flutter
+Authentication & Database: Firebase
+Video Call API: Agora
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is a simple Chat App. One can create account and chat with anyone who has account in this.
 
-A few resources to get you started if this is your first Flutter project:
+Previous username with account in this app (for Searching purposes):
+  - first (first@last.com)
+  - Nihit (nihitkumar.chp@gmail.com)
+  - Nishu (nishu@gmail.com)
+  
+To search any user in the app, search them by username (case-sensitive).
+No notification support till now.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Implementing: Video call Functionality, with multiple user access.
+Video Call using meeting code.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Developed using Agora API for Video Call.
