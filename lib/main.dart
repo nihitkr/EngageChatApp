@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.red,
       ),
       // home: const StateWrapper(),
-      home: userIsLoggedIn ? HomeScreen() : const StateWrapper(),
+      home: userIsLoggedIn ? HomeScreen() : LoginScreen(),
     );
   }
 }

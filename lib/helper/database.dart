@@ -1,6 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseMethods {
+  static String firstName = "Hello";
+  static String lastName = "User";
+
+  static void allotCurrentUser(String a, String b) {
+    firstName = a;
+    lastName = b;
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> getUserByName(
       String fName) async {
     return await FirebaseFirestore.instance
@@ -47,6 +55,13 @@ class DatabaseMethods {
         .collection("ChatRoom")
         .doc(ChatRoomId)
         .collection("chats")
+        .snapshots();
+  }
+
+  getChatRooms(String userName) {
+    return FirebaseFirestore.instance
+        .collection("ChatRoom")
+        .where("users", arrayContains: userName)
         .snapshots();
   }
 }

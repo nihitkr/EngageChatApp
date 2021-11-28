@@ -288,6 +288,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     DatabaseMethods databaseMethods = DatabaseMethods();
     databaseMethods.uploadUserInfo(userInfoMap);
     HelperFunctions.saveUserLoggedInSharedPreference(true);
+    DatabaseMethods.allotCurrentUser(
+        firstNameEditingController.text, lastNameEditingController.text);
     Navigator.pushAndRemoveUntil(
         (context),
         MaterialPageRoute(builder: (context) => HomeScreen()),

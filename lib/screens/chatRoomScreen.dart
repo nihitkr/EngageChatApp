@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:engage_chat_app/helper/constants.dart';
+import 'package:engage_chat_app/helper/database.dart';
 import 'package:engage_chat_app/helper/helper.dart';
 import 'package:engage_chat_app/screens/homescreen.dart';
 import 'package:engage_chat_app/screens/loginScreen.dart';

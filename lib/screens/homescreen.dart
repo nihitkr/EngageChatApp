@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engage_chat_app/helper/constants.dart';
+import 'package:engage_chat_app/helper/database.dart';
 import 'package:engage_chat_app/models/user_model.dart';
 import 'package:engage_chat_app/screens/chatRoomScreen.dart';
 import 'package:engage_chat_app/screens/loginScreen.dart';
+import 'package:engage_chat_app/screens/search.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +18,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   User? users = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
+
+  String firstName = DatabaseMethods.firstName;
+  String lastName = DatabaseMethods.lastName;
 
   void initState() {
     super.initState();
@@ -47,6 +53,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SearchScreen(),
+            ),
+          );
+        },
+        child: Icon(
+          Icons.search,
+        ),
+      ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(20),
@@ -72,7 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               Text(
-                "${loggedInUser.firstName} ${loggedInUser.lastName}",
+                // "${firstName} ${lastName}",
+                Constants.myName,
                 style: TextStyle(
                   color: Colors.black54,
                   fontWeight: FontWeight.w500,
