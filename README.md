@@ -4,7 +4,7 @@ A new Flutter project.
 Developed using:
 Framework: Flutter
 Authentication & Database: Firebase
-Video Call API: Agora
+Video Call API: Agora 
 
 
 ## Getting Started
@@ -23,3 +23,5 @@ Implementing: Video call Functionality, with multiple user access.
 Video Call using meeting code.
 
 Developed using Agora API for Video Call.
+
+PLEASE CHECK MAIN BRANCH FOR PROPER CHAT-APP WORKING CODE. The video calling feature is not yet complete. But you can view the partial code on VideoCall Branch. But it is still not stable, and cause certain errors.
