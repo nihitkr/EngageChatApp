@@ -35,7 +35,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                return MessageTile(snapshot.data!.docs[index]["message"]);
+                return MessageTile(
+                  snapshot.data!.docs[index]["message"],
+                  snapshot.data!.docs[index]["sendBy"] == Constants.myName,
+                );
               });
         });
   }
@@ -154,18 +157,45 @@ Future<void> logout(BuildContext context) async {
 
 class MessageTile extends StatelessWidget {
   final String message;
+  final bool isSendByMe;
 
-  MessageTile(this.message);
+  MessageTile(this.message, this.isSendByMe);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(
-        message,
-        style: TextStyle(
-          fontWeight: FontWeight.w300,
-          fontStyle: FontStyle.italic,
-          color: Colors.black,
+      margin: EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 8,
+      ),
+      width: MediaQuery.of(context).size.width,
+      alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 16,
+        ),
+        decoration: BoxDecoration(
+          color: isSendByMe ? Colors.red : Colors.red[50],
+          borderRadius: isSendByMe
+              ? BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
+                )
+              : BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+        ),
+        child: Text(
+          message,
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+            color: Colors.black,
+          ),
         ),
       ),
     );
